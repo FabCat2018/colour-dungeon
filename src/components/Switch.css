@@ -1,14 +1,11 @@
 .switch-box {
-    height: 50%;
-    width: 100%;
-    margin: 10px;
+    padding: 10px;
 }
 
 button {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    border: 2px black thick;
 }
 
 .button-off {

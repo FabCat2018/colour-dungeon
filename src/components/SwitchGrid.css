@@ -1,0 +1,7 @@
+.button-grid {
+    background-color: white;
+    border: 3px solid #fff;
+    padding: 20px;
+    margin: 0 0 0 38.5%;
+    display: table;
+}
