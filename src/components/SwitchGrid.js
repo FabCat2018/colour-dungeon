@@ -1,38 +1,58 @@
 import "./SwitchGrid.css";
 
+import { useEffect, useState } from "react";
+
 import React from "react";
 import Switch from "./Switch";
-import { useState } from "react";
+import WinnerModal from "./WinnerModal";
 
 function SwitchGrid() {
-  const rows = 3;
+  const rows = 2;
   const columns = 3;
   const [buttonGrid, setButtonGrid] = useState(
-    new Array(rows).fill(new Array(columns).fill(false))
+    [...Array(rows)].map(() => Array(columns).fill(false))
   );
+  const [showWinnerModal, setShowWinnerModal] = useState(false);
+
+  useEffect(() => {
+    let allSwitchesOn = true;
+    buttonGrid.forEach((row) => {
+      if (row.includes(false)) {
+        allSwitchesOn = false;
+      }
+    });
+    setShowWinnerModal(allSwitchesOn);
+  }, [buttonGrid]);
 
   return (
-    <table className="button-grid">
-      {buttonGrid.map((buttonRow, rowIndex) => {
-        return (
-          <tr>
-            {buttonRow.map((buttonState, cellIndex) => {
-              return (
-                <td className="button-cell">
-                  <Switch
-                    rowIndex={rowIndex}
-                    cellIndex={cellIndex}
-                    isOn={buttonState}
-                    allButtons={buttonGrid}
-                    updateButton={setButtonGrid}
-                  />
-                </td>
-              );
-            })}
-          </tr>
-        );
-      })}
-    </table>
+    <>
+      {showWinnerModal && (
+        <WinnerModal allButtons={buttonGrid} resetGrid={setButtonGrid} />
+      )}
+      <table className="button-grid">
+        <tbody>
+          {buttonGrid.map((buttonRow, rowIndex) => {
+            return (
+              <tr key={rowIndex}>
+                {buttonRow.map((buttonState, cellIndex) => {
+                  return (
+                    <td className="button-cell" key={cellIndex}>
+                      <Switch
+                        rowIndex={rowIndex}
+                        cellIndex={cellIndex}
+                        isOn={buttonState}
+                        allButtons={buttonGrid}
+                        updateButton={setButtonGrid}
+                      />
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
   );
 }
 

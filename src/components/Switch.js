@@ -14,7 +14,6 @@ function Switch({ rowIndex, cellIndex, isOn, allButtons, updateButton }) {
           if (i - 1 > -1) {
             newGrid[i - 1][j] = !allButtons[i - 1][j];
           }
-          debugger;
           if (i + 1 < allButtons.length) {
             newGrid[i + 1][j] = !allButtons[i + 1][j];
           }
