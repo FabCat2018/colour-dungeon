@@ -5,3 +5,17 @@
   margin: 0 0 0 38.5%;
   display: table;
 }
+
+.dimensions {
+  display: inline;
+}
+
+.dimensions input {
+  border: 2px solid;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin: 0.25rem;
+  margin-right: 2rem;
+  min-width: 125px;
+  padding: 0.5rem;
+}
