@@ -1,0 +1,18 @@
+.switch-box {
+  padding: 10px;
+}
+
+button {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.button-off {
+  background-color: red;
+}
+
+.button-on {
+  background-color: blue;
+}
