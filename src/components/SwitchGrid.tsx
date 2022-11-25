@@ -1,9 +1,7 @@
-import "./SwitchGrid.css";
-
 import { useEffect, useState } from "react";
-
-import React from "react";
+import { runSolver } from "../solver";
 import Switch from "./Switch";
+import "./SwitchGrid.css";
 import WinnerModal from "./WinnerModal";
 
 function SwitchGrid() {
@@ -44,7 +42,9 @@ function SwitchGrid() {
           type="text"
           value={rows}
           onChange={(event) => {
-            setRows(convertDimension(event.target.value));
+            const currentValue = convertDimension(event.target.value);
+            setRows(currentValue);
+            runSolver(currentValue, columns);
           }}
         />
         <label htmlFor="columns">Columns:</label>
@@ -52,7 +52,11 @@ function SwitchGrid() {
           id="columns"
           type="text"
           value={columns}
-          onChange={(event) => setColumns(convertDimension(event.target.value))}
+          onChange={(event) => {
+            const currentValue = convertDimension(event.target.value);
+            setColumns(currentValue);
+            runSolver(rows, currentValue);
+          }}
         />
       </div>
       <table className="button-grid">

@@ -1,13 +1,19 @@
 import BigNumber from "bignumber.js";
 
-export function solveGrid(x: number, y: number): BigNumber {
+export function runSolver(x: number, y: number) {
+  const solutions = solveGrid(x, y);
+  solutions.forEach((solution) => console.log(solution));
+}
+
+function solveGrid(x: number, y: number): Array<string> {
+  let solutions = [];
   let solved: boolean = false;
   let count: BigNumber = new BigNumber(1);
-  const maxSize: BigNumber = new BigNumber(2).exponentiatedBy(
-    new BigNumber(x * y)
-  );
+  const maxSize: BigNumber = new BigNumber(2)
+    .exponentiatedBy(new BigNumber(x * y))
+    .minus(1);
 
-  while (!solved && count.comparedTo(maxSize) <= 0) {
+  while (count.comparedTo(maxSize) <= 0) {
     if (count.mod(10000).isEqualTo(0)) {
       console.log(count.div(maxSize).times(100).toFixed(2), "%");
     }
@@ -34,10 +40,14 @@ export function solveGrid(x: number, y: number): BigNumber {
       }
     }
 
+    if (solved) {
+      solutions.push(mapBinaryToGrid(convertToBinary(count), x, y));
+    }
+
     count = count.plus(1);
   }
 
-  return count.minus(1);
+  return solutions;
 }
 
 function flipMatrixCells(
@@ -68,4 +78,41 @@ function flipMatrixCells(
   function flipIndividualCell(xIndex: number, yIndex: number) {
     matrix[xIndex][yIndex] = !matrix[xIndex][yIndex];
   }
+}
+
+function convertToBinary(n: BigNumber): string {
+  let copyN = BigNumber(n);
+  let result: string = "";
+
+  while (copyN.gt(0)) {
+    const shouldFill: boolean = copyN.mod(2).isEqualTo(1);
+    result = (shouldFill ? "1" : "0") + result;
+    copyN = copyN.dividedToIntegerBy(2);
+  }
+  return result;
+}
+
+function mapBinaryToGrid(
+  n: string,
+  columnLength: number,
+  rowLength: number
+): string {
+  let gridString = "";
+  let totalLength = columnLength * rowLength;
+
+  for (let i: number = n.length; i < totalLength; i++) {
+    gridString = "0" + gridString;
+  }
+
+  let count = totalLength - n.length;
+
+  for (let i: number = 0; i < n.length; i++) {
+    if (count % rowLength === 0) {
+      gridString += "\n";
+    }
+    gridString += n[i];
+    count++;
+  }
+
+  return gridString;
 }
