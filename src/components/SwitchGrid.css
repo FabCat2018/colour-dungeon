@@ -1,21 +1,46 @@
-.button-grid {
-  background-color: white;
-  border: 3px solid #fff;
-  padding: 20px;
-  margin: 0 0 0 38.5%;
-  display: table;
-}
-
 .dimensions {
-  display: inline;
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 0 auto;
 }
 
-.dimensions input {
+.dimension input {
+  font-size: 1rem;
+  text-align: center;
   border: 2px solid;
   border-radius: 4px;
-  font-size: 1rem;
-  margin: 0.25rem;
-  margin-right: 2rem;
-  min-width: 125px;
+  margin: 0.25rem 0.5rem;
+  max-width: 1.5rem;
   padding: 0.5rem;
+}
+
+.button-grid {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-grid tbody {
+  background-color: #fff;
+  margin: 2rem;
+}
+
+.solve-button,
+.solve-button:link,
+.solve-button:visited {
+  width: 20%;
+  margin: 5%;
+  height: 50px;
+  font-size: large;
+  background-color: #fff;
+  border: 3px solid #00f;
+  cursor: pointer;
+}
+
+.solve-button:hover,
+.solve-button:active {
+  border: 3px solid #fff;
+  background-color: #00f;
+  color: #fff;
 }

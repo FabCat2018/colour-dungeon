@@ -36,28 +36,26 @@ function SwitchGrid() {
         <WinnerModal allButtons={buttonGrid} resetGrid={setButtonGrid} />
       )}
       <div className="dimensions">
-        <label htmlFor="rows">Rows:</label>
-        <input
-          id="rows"
-          type="text"
-          value={rows}
-          onChange={(event) => {
-            const currentValue = convertDimension(event.target.value);
-            setRows(currentValue);
-            runSolver(currentValue, columns);
-          }}
-        />
-        <label htmlFor="columns">Columns:</label>
-        <input
-          id="columns"
-          type="text"
-          value={columns}
-          onChange={(event) => {
-            const currentValue = convertDimension(event.target.value);
-            setColumns(currentValue);
-            runSolver(rows, currentValue);
-          }}
-        />
+        <div className="dimension">
+          <label htmlFor="rows">Rows:</label>
+          <input
+            id="rows"
+            type="text"
+            value={rows}
+            onChange={(event) => setRows(convertDimension(event.target.value))}
+          />
+        </div>
+        <div className="dimension">
+          <label htmlFor="columns">Columns:</label>
+          <input
+            id="columns"
+            type="text"
+            value={columns}
+            onChange={(event) =>
+              setColumns(convertDimension(event.target.value))
+            }
+          />
+        </div>
       </div>
       <table className="button-grid">
         <tbody>
@@ -82,6 +80,9 @@ function SwitchGrid() {
           })}
         </tbody>
       </table>
+      <button className="solve-button" onClick={() => runSolver(rows, columns)}>
+        Autosolve Grid
+      </button>
     </>
   );
 }

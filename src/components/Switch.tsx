@@ -49,7 +49,7 @@ function Switch({
   return (
     <div className="switch-box">
       <button
-        className={isOn ? "button-on" : "button-off"}
+        className={`switch ${isOn ? "button-on" : "button-off"}`}
         onClick={handleUpdate}
       />
     </div>
